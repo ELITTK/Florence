@@ -24,7 +24,7 @@ public class VCAMcontrol : MonoBehaviour
     
     void CameraShift(int i)
     {
-        VCam[(currentCam + i) % 4].SetActive(true);
+        VCam[(currentCam + i + 4) % 4].SetActive(true);
         VCam[currentCam].SetActive(false);
         currentCam = (currentCam + i) % 4;
     }
