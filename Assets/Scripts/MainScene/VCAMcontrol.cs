@@ -26,6 +26,6 @@ public class VCAMcontrol : MonoBehaviour
     {
         VCam[(currentCam + i + 4) % 4].SetActive(true);
         VCam[currentCam].SetActive(false);
-        currentCam = (currentCam + i) % 4;
+        currentCam = (currentCam + i + 4) % 4;
     }
 }
