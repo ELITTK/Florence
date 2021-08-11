@@ -27,7 +27,11 @@ public class MusicSceneBase : MonoBehaviour
         if (isIntroed)  
         {
             //开头已完成
-
+            if (timer > noteTime)
+            {
+                timer -= noteTime;
+                EventCenter.GetInstance().EventTrigger("NoteGenerate");
+            }
         }
         else 
         {
