@@ -8788,7 +8788,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shader: {fileID: 4800000, guid: 3a536047ff5b2d2408f437d9ad40a339, type: 3}
-  PixelInterval: 0.011
+  PixelInterval: 0.003
   PixelItensity: 1
 --- !u!4 &964355388 stripped
 Transform:
