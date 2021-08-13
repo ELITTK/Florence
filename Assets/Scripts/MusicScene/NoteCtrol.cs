@@ -22,6 +22,6 @@ public class NoteCtrol : MonoBehaviour
 
     void Movement()
     {
-        //rectTrans.anchoredPosition.x;
+        rectTrans.anchoredPosition= new Vector2();//ÊäÈë×ø±ê
     }
 }
