@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Note : MonoBehaviour
 {
+    public float speed;
+
+    private RectTransform rectTrans;
     private BoxCollider2D box;
     // Start is called before the first frame update
     void Start()
@@ -26,5 +29,10 @@ public class Note : MonoBehaviour
             //add partical effect
             Destroy(this);
         }
+    }
+
+    void Movement()
+    {
+        rectTrans.anchoredPosition = new Vector2();//ÊäÈë×ø±ê
     }
 }

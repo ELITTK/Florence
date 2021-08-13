@@ -5,6 +5,7 @@ using UnityEngine;
 public class TrackControl : MonoBehaviour
 {
     public GameObject[] tracks = new GameObject[3];
+    public GameObject Note;
     public int speedBase, speedCtrl;
 
     private float speed;
