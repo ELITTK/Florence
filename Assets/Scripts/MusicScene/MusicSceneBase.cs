@@ -12,7 +12,8 @@ public class MusicSceneBase : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        noteTime = 3600 / bpm;
+        noteTime = 60 / bpm;
+        Debug.Log(noteTime);
         EventCenter.GetInstance().AddEventListener("NoteHit",SceneCtrl);
     }
 
@@ -32,6 +33,7 @@ public class MusicSceneBase : MonoBehaviour
             {
                 timer -= noteTime;
                 EventCenter.GetInstance().EventTrigger("NoteGenerate");
+                //Debug.Log("NoteGenerate");
             }
         }
         else 

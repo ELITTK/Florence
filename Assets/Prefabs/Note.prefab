@@ -117,6 +117,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 4197139268513801281, guid: 87304b8741649c049b9b07fb42834197, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4197139268513801282, guid: 87304b8741649c049b9b07fb42834197, type: 3}
       propertyPath: m_Name
       value: SoundEffect
