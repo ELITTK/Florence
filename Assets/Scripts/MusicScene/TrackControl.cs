@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TrackControl : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class TrackControl : MonoBehaviour
         speed = length / speedBase * speedCtrl;
         EventCenter.GetInstance().AddEventListener("NoteGenerate", NoteGenerate);
 
-        //mat = gameObject.GetComponent<Renderer>().material;
+        mat = gameObject.GetComponent<Image>().material;
     }
 
     // Update is called once per frame
@@ -30,12 +31,17 @@ public class TrackControl : MonoBehaviour
     }
     void NoteGenerate()
     {
+        int trackNum = Random.Range(0, 3);
+        Debug.Log(trackNum);
         GameObject note = PopPool();
         NoteCtrl noteF = note.GetComponentInChildren<NoteCtrl>();
         //添加初始化内容   
-        noteF.rectTrans = tracks[Random.Range(0, 2)];
-        noteF.rectTrans.position = tracks[Random.Range(0, 2)].position;
+        noteF.initialPosition = tracks[trackNum].gameObject.transform.position;
+        //noteF.rectTrans = tracks[trackNum];
+        noteF.Initialize();
+        //noteF.rectTrans.position = tracks[trackNum].position;
         noteF.speed = speed;
+        noteF.smoothTime = speedBase;
         note.SetActive(true);
     }
 
@@ -48,7 +54,7 @@ public class TrackControl : MonoBehaviour
                 return obj;
             }
         }
-        GameObject note = Instantiate(Note,GameObject.Find("Canvas").transform);
+        GameObject note = Instantiate(Note,GameObject.Find("Track").transform);
         notePoolList.Add(note);
 
         return note;
