@@ -8,7 +8,9 @@ public class PlayerCtrl_Music : MonoBehaviour
     public float smoothTime = 0.05F;
 
     private int current;
-    private bool isMoving;
+    //
+    public bool isMoving;
+    //
     private Vector3 velocity = Vector3.zero;
     private Vector3 tarPosition;
     private float horizonInput;
@@ -18,7 +20,7 @@ public class PlayerCtrl_Music : MonoBehaviour
         isMoving = false;
         current = 0;
         
-        tarPosition = new Vector3(transform.position.x, tracks[0].position.y, 1f);
+        tarPosition = new Vector3(transform.position.x, tracks[0].position.y, 1);
         Debug.Log(tarPosition);
         Debug.Log(transform.position);
         transform.position = tarPosition;
@@ -37,6 +39,7 @@ public class PlayerCtrl_Music : MonoBehaviour
         
         if (isMoving)
         {
+            //Debug.Log(tarPosition);
             transform.position = Vector3.SmoothDamp(transform.position, tarPosition, ref velocity, smoothTime);
             if (Vector3.Distance(tarPosition,transform.position) < 0.1f)
             {
@@ -45,15 +48,17 @@ public class PlayerCtrl_Music : MonoBehaviour
         }
         else
         {
-            if (horizonInput > 0.2f && current != 0)
+            if (horizonInput > 0.2f && current > 0)
             {   
-                current--;             
+                current--;
+                isMoving = true;
             }
-            if (horizonInput < 0.2f && current != 2)
+            if (horizonInput < 0.2f && current < 2)
             {
                 current++;
+                isMoving = true;
             }
-            isMoving = true;
+            
             tarPosition = new Vector3(transform.position.x, tracks[current].position.y, 0f);
         }
         //Debug.Log("isMoving");

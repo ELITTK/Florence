@@ -22,6 +22,7 @@ public class MusicSceneBase : MonoBehaviour
         dialogCounter = 0;
         EventCenter.GetInstance().AddEventListener("NoteHit",SceneCtrl);
 
+        //Do not delete
         sofa.transform.position = new Vector3(sofa.transform.position.x, sofa.transform.position.y, 50f - clearNote / 2f);
     }
 
