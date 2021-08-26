@@ -8,21 +8,21 @@ public class UIText : MonoBehaviour
     public int counts = 0;
     public int maxCounts = 3;
 
-    public ItemOrderCheck itemOrderCheck;
+    public LevelManager levelManager;
 
     private Text text;
 
     void Start()
     {
-        maxCounts = itemOrderCheck.neededOrder.Count;
-
         text = GetComponent<Text>();
+        ResetCount();
+
         EventCenter.GetInstance().AddEventListener("放置计数增加", AddCount);
         EventCenter.GetInstance().AddEventListener<bool>("组合结束", GetPlaceResult);
-        FreshText();
+        EventCenter.GetInstance().AddEventListener("重置计数器", ResetCount);
     }
 
-    public void FreshText()
+    private void FreshText()
     {
         text.text = counts.ToString() + "/" + maxCounts.ToString();
         if (counts >= maxCounts)
@@ -31,22 +31,31 @@ public class UIText : MonoBehaviour
         }
     }
 
-    public void AddCount()
-    { 
-        counts++;
-        FreshText();
-    }
 
-    public void GetPlaceResult(bool b)
+    private void GetPlaceResult(bool b)
     {
-        Debug.Log("放置完成");
         if (b)
         {
-            text.text = "组合成功";
+            text.text = "组合成功,即将切换至下一组物品";//胜利了
+            EventCenter.GetInstance().EventTrigger("组合成功");
         }
         else
         {
-            text.text = "组合失败";
+            text.text = "组合失败";//失败了
+            EventCenter.GetInstance().EventTrigger("组合失败");
         }
+    }
+
+    private void AddCount()
+    {
+        counts++;
+        FreshText();
+
+    }
+    private void ResetCount()//重置计数器
+    {
+        counts = 0;
+        maxCounts = levelManager.GetActiveItemOrderCheck().neededOrder.Count;
+        FreshText();
     }
 }

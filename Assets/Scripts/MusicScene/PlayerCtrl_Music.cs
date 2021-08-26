@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class PlayerCtrl_Music : MonoBehaviour
 {
-    public Transform[] tracks = new Transform[3];
+    //public Transform[] tracks = new Transform[3];
     public float smoothTime = 0.05F;
-
+    public float positionX;
+    public float[] positionY = new float[3];
     private int current;
     //
     public bool isMoving;
     //
     private Vector3 velocity = Vector3.zero;
+
     private Vector3 tarPosition;
     private float horizonInput;
     // Start is called before the first frame update
@@ -20,7 +22,7 @@ public class PlayerCtrl_Music : MonoBehaviour
         isMoving = false;
         current = 0;
         
-        tarPosition = new Vector3(transform.position.x, tracks[0].position.y, 1);
+        tarPosition = new Vector3(positionX, positionY[0], 150);
         Debug.Log(tarPosition);
         Debug.Log(transform.position);
         transform.position = tarPosition;
@@ -29,7 +31,7 @@ public class PlayerCtrl_Music : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        horizonInput = Input.GetAxis("Horizontal");
+        horizonInput = Input.GetAxis("Vertical");
         Movement();
         //Debug.Log(tarPosition); 
     }
@@ -41,7 +43,7 @@ public class PlayerCtrl_Music : MonoBehaviour
         {
             //Debug.Log(tarPosition);
             transform.position = Vector3.SmoothDamp(transform.position, tarPosition, ref velocity, smoothTime);
-            if (Vector3.Distance(tarPosition,transform.position) < 0.1f)
+            if (Vector3.Distance(tarPosition,transform.position) < 0.2f)
             {
                 isMoving = false;
             }
@@ -53,14 +55,14 @@ public class PlayerCtrl_Music : MonoBehaviour
                 current--;
                 isMoving = true;
             }
-            if (horizonInput < 0.2f && current < 2)
+            if (horizonInput < -0.2f && current < 2)
             {
                 current++;
                 isMoving = true;
             }
             
-            tarPosition = new Vector3(transform.position.x, tracks[current].position.y, 0f);
-        }
+            tarPosition = new Vector3(transform.position.x, positionY[current], 150);
+        }   
         //Debug.Log("isMoving");
     }   
 }

@@ -36,8 +36,12 @@ public class ItemOrderCheck : MonoBehaviour
                 EventCenter.GetInstance().EventTrigger("组合结束",false);
                 return;
             }
-            EventCenter.GetInstance().EventTrigger("组合结束", true);
         }
+        EventCenter.GetInstance().EventTrigger("组合结束", true);
+
+
+        EventCenter.GetInstance().RemoveEventListener<GameObject>("放置物品", PlaceAddItem);
+        EventCenter.GetInstance().RemoveEventListener("放置完成", CheckOrder);
     }
 
 }

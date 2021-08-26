@@ -9,7 +9,7 @@ public class DragItem : MonoBehaviour
 {
     public float limitMaxY = 2f;//Y轴调整，拿起物品后，物品Y值不会高于该值
     public static float adjustZ = 0f;//Z轴调整，拿起物品后会自动调整Z到该值
-    private float limitMinY;//Y轴调整，拿起物品后，物品Y值不会低于该值。默认为物品初始y值
+    private float limitMinY;//Y轴调整，拿起物品后，物品Y值不会低于该值。默认为物品初始y值+0.18
 
     private bool isInRightPlace = false;//是否处于可放置的区域内了
     private bool isPlaced = false;//是否已经放置
@@ -26,7 +26,7 @@ public class DragItem : MonoBehaviour
     {
         startPos = transform.position;
         cam = GameObject.Find("Main Camera").GetComponent<Camera>();
-        limitMinY = transform.position.y;
+        limitMinY = transform.position.y+0.18f;
     }
 
 
@@ -60,6 +60,7 @@ public class DragItem : MonoBehaviour
 
         if (mouseState == 1)//一直按着鼠标
         {
+            //位置
             Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
 
             Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, pos.z);
@@ -77,9 +78,18 @@ public class DragItem : MonoBehaviour
             {
                 transform.position = new Vector3(transform.position.x, transform.position.y, adjustZ);
             }
+
+            //垂直向下射线
+            Vector3 direction = new Vector3(0,-1,0);
+
+            RaycastHit hitDown;
+
+            Physics.Raycast(transform.position+new Vector3(0,-1,0), direction, out hitDown, 300);
+            Debug.DrawLine(transform.position, hitDown.point);
+
+            }
         }
 
-    }
 
 
 

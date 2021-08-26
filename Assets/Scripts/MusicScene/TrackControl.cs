@@ -32,7 +32,7 @@ public class TrackControl : MonoBehaviour
     void NoteGenerate()
     {
         int trackNum = Random.Range(0, 3);
-        Debug.Log(trackNum);
+        //Debug.Log(trackNum);
         GameObject note = PopPool();
         NoteCtrl noteF = note.GetComponentInChildren<NoteCtrl>();
         //添加初始化内容   

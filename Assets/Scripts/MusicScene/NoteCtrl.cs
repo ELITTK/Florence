@@ -10,10 +10,12 @@ public class NoteCtrl : MonoBehaviour
     public RectTransform rectTrans;
     public Vector3 initialPosition, tarPosition;
     public float smoothTime = 0.3F;
+    public float fadeTime = 1f;
 
     private ParticleSystem particle;
     private BoxCollider box;
     private Vector3 velocity = Vector3.zero;
+    private bool moveable;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,36 +23,43 @@ public class NoteCtrl : MonoBehaviour
         particle.Stop();
         rectTrans = gameObject.GetComponent<RectTransform>();
         box = gameObject.GetComponent<BoxCollider>();
-
+        moveable = true;
     }
     private void OnEnable()
     {
         particle = transform.Find("SoundEffect").gameObject.GetComponent<ParticleSystem>();
         particle.Stop();
+        moveable = true;
     }
     // Update is called once per frame
     void FixedUpdate()
     {
-        Movement();
+        if (moveable)
+        {
+            Movement();
+        }
+
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
             EventCenter.GetInstance().EventTrigger("NoteHit");
             //add partical effect here
-
+            moveable = false;
             particle.Play();
-            StartCoroutine(Timer(1.5f));
-            particle.Stop();
-            gameObject.SetActive(false);
+            Debug.Log("start partical");
+            StartCoroutine(Timer(fadeTime));
+            //particle.Stop();
+            //Debug.Log("stop partical");
+            //gameObject.SetActive(false);
         }
     }
 
     void Movement()
     {
-        if (initialPosition.x - transform.position.x > 700)
+        if (initialPosition.x - transform.position.x > 300)
         {
             gameObject.SetActive(false);
         }
@@ -60,15 +69,20 @@ public class NoteCtrl : MonoBehaviour
     }   
     IEnumerator Timer(float time)
     {
-        while (true)
+        while (time > 0)
         {
-            yield return new WaitForSeconds(time);
+            yield return new WaitForSeconds(0.1f);
+            time -= 0.1f;
         }
+        particle.Stop();
+        Debug.Log("stop partical");
+        gameObject.SetActive(false);
+        yield break;
     }
 
     public void Initialize()
     {
-        tarPosition = new Vector3(initialPosition.x - 800, initialPosition.y, initialPosition.z);
+        tarPosition = new Vector3(initialPosition.x - 400, initialPosition.y, initialPosition.z);
         transform.position = initialPosition;
     }
     /*

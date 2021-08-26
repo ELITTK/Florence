@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4588741139431204279}
   - component: {fileID: 4588741139431204278}
   - component: {fileID: 4421520045117051524}
+  - component: {fileID: 5215106487295496217}
   m_Layer: 5
   m_Name: Note
   m_TagString: Untagged
@@ -90,6 +91,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
+  rectTrans: {fileID: 0}
+  initialPosition: {x: 0, y: 0, z: 0}
+  tarPosition: {x: 0, y: 0, z: 0}
+  smoothTime: 0.3
+  fadeTime: 0.1
+--- !u!65 &5215106487295496217
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4588741139431204276}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9, y: 33, z: 7}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &4588741140894972043
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -101,9 +120,21 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 3336936310302982100, guid: 87304b8741649c049b9b07fb42834197, type: 3}
+      propertyPath: m_SortingOrder
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 4197139267608492853, guid: 87304b8741649c049b9b07fb42834197, type: 3}
+      propertyPath: m_SortingOrder
+      value: 600
+      objectReference: {fileID: 0}
     - target: {fileID: 4197139267608492855, guid: 87304b8741649c049b9b07fb42834197, type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4197139268230896884, guid: 87304b8741649c049b9b07fb42834197, type: 3}
+      propertyPath: m_SortingOrder
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 4197139268230896886, guid: 87304b8741649c049b9b07fb42834197, type: 3}
       propertyPath: m_Layer
